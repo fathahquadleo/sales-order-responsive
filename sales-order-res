@@ -1,0 +1,240 @@
+            <Row className="g-3 pt-3">
+              {/* First Box */}
+              <Col xl="6" sm="12">
+                <div className="border font-size-fourteen">
+                  <CardBody>
+                    <div className="d-flex border-bottom">
+                      <H4>Item Details:</H4>
+                      <button className="btn btn-success ml-auto" style={{ marginTop: '-25px', padding: '0.25rem 0.5rem' }} >Add item</button>
+                      {/* <button
+                        type="button"
+                        className="btn btn-success btn-sm ml-auto"
+                        style={{ marginTop: '-25px', fontSize: '0.8rem', padding: '0.25rem 0.5rem' }}
+                        onClick={handleProductSelect}
+                      >
+                        <i className="fa fa-plus-circle"></i>
+                      </button> */}
+                    </div>
+                    <div>
+                      <Row className="mt-4 mb-2">
+                        <Col xs="auto" className="d-flex align-items-center">Item:</Col>
+                        <Col xs="9">
+                          {form.map((item, index) => (
+                            <CreatableSelect
+                              key={`item-${index}`}
+                              name={`items[${index}].name`}
+                              options={itemsoptions}
+                              value={itemsoptions.find(option => option.label == item.name)} onChange={(e) =>
+                                handleItemSelect(index, e)
+                              }
+                              isClearable
+                              styles={{
+                                control: (baseStyles, state) => ({
+                                  ...baseStyles,
+                                  height: 30,
+                                }),
+                                menu: (baseStyles) => ({
+                                  ...baseStyles,
+                                  zIndex: 1000,
+                                }),
+                              }}
+                              theme={(theme) => ({
+                                ...theme,
+                                colors: {
+                                  ...theme.colors,
+                                  primary25: '#fffff',
+                                  primary: '#534686',
+                                  primary50: 'rgba(83, 70, 134, 0.3)'
+                                },
+                              })}
+
+
+                            />
+                          ))}
+                        </Col>
+                      </Row>
+                      <Row className="mb-2">
+
+                        <Col xs="auto" className="d-flex align-items-center">Quantity:</Col>
+                        <Col xs="9">
+                          {form.map((item, index) => (
+                            <td className="col-1">
+                              <input
+                                name={`items[${index}].qty`}
+                                placeholder='Qty'
+                                value={item.qty}
+                                min={0}
+                                onChange={(e) =>
+                                  handleQuantityChange(
+                                    index,
+                                    e.target.value,
+                                  )}
+                                className="form-control text-center"
+                              />
+                            </td>
+                          ))}
+                        </Col>
+                        {/* <Col xs="auto"><input type="text" style={{ width: '120px' }} /></Col> */}
+
+                        <Col xs="auto" className="d-flex align-items-center">Unit Price:</Col>
+                        <Col xs="9">
+                          {form.map((item, index) => (
+
+                            <td className=" col-2">
+                              <input
+                                name={`items[${index}].price`}
+                                placeholder='Unit cost'
+                                value={item.price}
+                                min={0}
+                                type="number"
+                                onChange={(e) => handleunitCostChange(index, e.target.value)}
+                                className="form-control text-end"
+
+
+                              />
+                            </td>
+
+                          ))}
+                        </Col>
+                        {/* <Col xs="auto"><input type="text" style={{ width: '120px' }} /></Col> */}
+                      </Row>
+                      <Row className="mb-2">
+
+                        <Col xs="auto" className="d-flex align-items-center">Discount:</Col>
+                        <Col xs="9">
+                          {form.map((item, index) => (
+                            <td className=" col-1">
+                              <input
+                                name={`items[${index}].itemTotal`}
+                                placeholder='Item total'
+                                value={`${currency} ${item.itemTotal}`}
+                                className="form-control text-end"
+                                readOnly
+                                type="text"
+
+                              />
+                            </td>
+                          ))}
+                        </Col>
+
+                        {/* <Col xs="auto"><input type="text" style={{ width: '120px' }} /></Col> */}
+
+                        <Col xs="auto" className="d-flex align-items-center">Item Total:</Col>
+                        <Col xs="9">
+                          {form.map((item, index) => (
+
+                            <td className=" col-1">
+                              <input
+                                name={`items[${index}].itemTotal`}
+                                placeholder='Item total'
+                                value={`${currency} ${item.itemTotal}`}
+                                className="form-control text-end"
+                                readOnly
+                                type="text"
+
+                              />
+                            </td>
+                          ))}
+                        </Col>
+
+                        {/* <Col xs="auto"><input type="text" style={{ width: '120px' }} /></Col> */}
+                      </Row>
+                      <Row className="mb-2">
+
+                        <Col xs="auto" className="d-flex align-items-center">Tax:</Col>
+                        <Col xs="9">
+                          {form.map((item, index) => (
+
+                            <td className=" col-2">
+
+                              <Select
+                                name={`items[${index}].tax`}
+                                key={`item-${index}`}
+                                options={taxOption}
+                                value={taxOption.find(options => options?.value == item.tax_group_id) || ''}
+                                styles={{
+                                  control: (baseStyles, state) => ({
+                                    ...baseStyles,
+                                    height: 45,
+                                  }),
+                                  menu: (baseStyles) => ({
+                                    ...baseStyles,
+                                    zIndex: 1000,
+                                  }),
+                                }}
+                                theme={(theme) => ({
+                                  ...theme,
+                                  colors: {
+                                    ...theme.colors,
+                                    primary25: 'rgba(83, 70, 134, 0.474)',
+                                    primary: '#534686',
+                                    primary50: 'rgba(83, 70, 134, 0.3)'
+                                  },
+                                })}
+                                onChange={(selected) => {
+                                  handleTaxSelect(index, selected);
+                                }}
+                              />
+                            </td>
+
+                          ))}
+                        </Col>
+                        {/* <Col xs="auto"><input type="text" style={{ width: '120px' }} /></Col> */}
+                        <Row className="mb-3">
+                        <Col xs="auto" className="d-flex align-items-center">Total:</Col>
+                        <Col xs="9">
+                          {form.map((item, index) => (
+                            <input
+                              key={`total-${index}`}
+                              name={`items[${index}].total`}
+                              placeholder='Total'
+                              value={`${currency} ${item.total}`}
+                              className="form-control text-end"
+                              readOnly
+                            />
+                          ))}
+                        </Col>
+                        </Row>
+                      </Row>
+                    </div>
+                    <div className="d-flex justify-content-end">
+
+                      <button
+                        onClick={() => handleRemove(index)}
+                        type="button"
+                        className="btn btn-danger btn-sm"
+                        disabled={form.length <= 1}
+                        style={{ fontSize: '0.9rem', padding: '0.25rem 0.5rem' }}
+                      >
+                        <i className="fa fa-trash-o"></i>
+                      </button>
+                    </div>
+                  </CardBody>
+                </div>
+              </Col>
+
+
+
+
+
+
+              {/* Second Box */}
+              <Col xl="6" sm="12">
+                <Col xl="12" sm="12">
+                  <div className="border font-size-fourteen">
+                    <CardBody>
+                      <div className="d-flex border-bottom">
+                        <H4>Item Amount:</H4>
+                      </div>
+                      <div className="mt-4">
+                        <div className="mb-2">Unit Cost:</div>
+                        <div className="mb-2">Discount:</div>
+                        <div className="mb-2">Tax:</div>
+                        <div className="mb-2">Total:</div>
+                        <div className="mb-4">Item Total:</div>
+                      </div>
+                    </CardBody>
+                  </div>
+                </Col>
+              </Col>
+            </Row>
